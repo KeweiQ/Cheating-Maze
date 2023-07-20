@@ -102,13 +102,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.collider.CompareTag("Start"))
         {
-            Debug.Log("Start");
-            Destroy(collision.collider.gameObject);
+            GameStatus.start = true;
+            collision.collider.gameObject.SetActive(false);
         }
         else if (collision.collider.CompareTag("End"))
         {
-            Debug.Log("End");
-            Destroy(collision.collider.gameObject);
+            GameStatus.win = true;
+            collision.collider.gameObject.SetActive(false);
         }
     }
 }
