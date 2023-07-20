@@ -13,16 +13,17 @@ public class PlayerMovement : MonoBehaviour
     // player movement
     private float moveScale = 20.0f;
     private Vector3 heading;
+    private Vector3 movement;
 
     // object components
-    private Rigidbody PlayerRigidbody;
     private Transform PlayerTransform;
+    private Rigidbody PlayerRigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerRigidbody = GetComponent<Rigidbody>();
         PlayerTransform = GetComponent<Transform>();
+        PlayerRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -95,20 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // let the character go forward
-        PlayerRigidbody.velocity = heading * inputScale * moveScale;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Start"))
-        {
-            GameStatus.start = true;
-            collision.collider.gameObject.SetActive(false);
-        }
-        else if (collision.collider.CompareTag("End"))
-        {
-            GameStatus.win = true;
-            collision.collider.gameObject.SetActive(false);
-        }
+        movement = heading * inputScale * moveScale;
+        PlayerRigidbody.velocity = new Vector3(movement[0], PlayerRigidbody.velocity[1], movement[2]);
     }
 }
