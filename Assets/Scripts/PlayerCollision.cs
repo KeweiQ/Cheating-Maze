@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    public static string onSwitch = "";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,23 +32,28 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("OpenLight"))
         {
-
+            onSwitch = "OpenLight";
         }
         else if (other.CompareTag("ChangeCamera"))
         {
-
+            onSwitch = "ChangeCamera";
         }
         if (other.CompareTag("ShowMap"))
         {
-
+            onSwitch = "ShowMap";
         }
         if (other.CompareTag("ShowPath"))
         {
-
+            onSwitch = "ShowPath";
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        onSwitch = "";
     }
 }
