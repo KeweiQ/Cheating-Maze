@@ -10,6 +10,8 @@ TagManager:
   - ChangeCamera
   - ShowMap
   - ShowPath
+  - FakeGround
+  - Map
   layers:
   - Default
   - TransparentFX

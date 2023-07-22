@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class CheatConsole : MonoBehaviour
 {
@@ -18,13 +19,26 @@ public class CheatConsole : MonoBehaviour
     // cheat objects
     // public GameObject Map;
     public GameObject Path;
+    public GameObject DirectionalLightObject;
+    public Light DirectionalLight;
+    public Material daySkybox;
+    public Material nightSkybox;
+
+    void Awake()
+    {
+        // Store the default skybox material before any modifications occur
+        daySkybox = UnityEngine.RenderSettings.skybox;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        DirectionalLight = DirectionalLightObject.GetComponent<Light>();
         CheatSwitchMessage.enabled = false;
         CheatMessage.enabled = false;
         Path.SetActive(false);
+        UnityEngine.RenderSettings.skybox = nightSkybox;
+        DirectionalLight.intensity = 0.1f;
     }
 
     // Update is called once per frame
@@ -85,7 +99,6 @@ public class CheatConsole : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
             {
                 TurnOffCheat();
-                CheatMessage.enabled = false;
             }
         }
     }
@@ -93,6 +106,8 @@ public class CheatConsole : MonoBehaviour
     void OpenLight()
     {
         CheatMessage.enabled = true;
+        UnityEngine.RenderSettings.skybox = daySkybox;
+        DirectionalLight.intensity = 1.0f;
     }
 
     void ChangeCamera()
@@ -114,5 +129,8 @@ public class CheatConsole : MonoBehaviour
     void TurnOffCheat()
     {
         Path.SetActive(false);
+        UnityEngine.RenderSettings.skybox = nightSkybox;
+        DirectionalLight.intensity = 0.1f;
+        CheatMessage.enabled = false;
     }
 }
