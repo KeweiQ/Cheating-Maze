@@ -6,23 +6,33 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class CheatConsole : MonoBehaviour
 {
+    private Transform PlayerTransform;
+
     // cheat function indicators
-    private static bool openLight = false;
-    private static bool changeCamera = false;
-    private static bool showMap = false;
-    private static bool showPath = false;
+    public static bool openLight = false;
+    public static bool changeCamera = false;
+    public static bool showMap = false;
+    public static bool showPath = false;
 
     // cheat messages
     public TextMeshProUGUI CheatSwitchMessage;
     public TextMeshProUGUI CheatMessage;
 
-    // cheat objects
-    // public GameObject Map;
-    public GameObject Path;
+    // open light related
     public GameObject DirectionalLightObject;
     public Light DirectionalLight;
     public Material daySkybox;
     public Material nightSkybox;
+
+    // change camera related
+    public Camera TopDownCamera;
+    public Camera PlayerViewCamera;
+
+    // show map related
+    // public GameObject Map;
+
+    // show path related
+    public GameObject Path;
 
     void Awake()
     {
@@ -33,12 +43,13 @@ public class CheatConsole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // get objects
+        PlayerTransform = GetComponent<Transform>();
         DirectionalLight = DirectionalLightObject.GetComponent<Light>();
+
+        // turn off cheat when game start
+        TurnOffCheat();
         CheatSwitchMessage.enabled = false;
-        CheatMessage.enabled = false;
-        Path.SetActive(false);
-        UnityEngine.RenderSettings.skybox = nightSkybox;
-        DirectionalLight.intensity = 0.1f;
     }
 
     // Update is called once per frame
@@ -105,32 +116,60 @@ public class CheatConsole : MonoBehaviour
 
     void OpenLight()
     {
+        openLight = true;
         CheatMessage.enabled = true;
+
         UnityEngine.RenderSettings.skybox = daySkybox;
         DirectionalLight.intensity = 1.0f;
     }
 
     void ChangeCamera()
     {
+        changeCamera = false;
         CheatMessage.enabled = true;
+
+        TopDownCamera.enabled = true;
+        PlayerViewCamera.enabled = false;
+
+        Vector3 currentRotation = PlayerTransform.eulerAngles;
+        currentRotation.y = 0f;
+        PlayerTransform.eulerAngles = currentRotation;
     }
 
     void ShowMap()
     {
+        showMap = false;
         CheatMessage.enabled = true;
     }
 
     void ShowPath()
     {
-        Path.SetActive(true);
+        showPath = true;
         CheatMessage.enabled = true;
+
+        Path.SetActive(true);
     }
 
     void TurnOffCheat()
     {
-        Path.SetActive(false);
+        // reset light
         UnityEngine.RenderSettings.skybox = nightSkybox;
         DirectionalLight.intensity = 0.1f;
+
+        // reset camera
+        TopDownCamera.enabled = false;
+        PlayerViewCamera.enabled = true;
+        
+        // hide path
+        Path.SetActive(false);
+
+        // hide cheat message
         CheatMessage.enabled = false;
-    }
+
+        // reset cheat function indicators
+        openLight = false;
+        changeCamera = false;
+        showMap = false;
+        showPath = false;
+}
 }
