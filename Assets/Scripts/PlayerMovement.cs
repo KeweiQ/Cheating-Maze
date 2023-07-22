@@ -6,18 +6,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // user inputs
-    private float wsInput;
-    private float adInput;
+    private float verticalInput;
+    private float horizontalInput;
     private float inputScale;
 
     // player movement
     private float moveScale = 20.0f;
+    private float rotationSpeed = 5.0f;
     private Vector3 heading;
     private Vector3 movement;
 
     // object components
     private Transform PlayerTransform;
     private Rigidbody PlayerRigidbody;
+    public GameObject PlayerViewCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // get keyboard inputs
-        wsInput = Input.GetAxis("Vertical");
-        adInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
     }
 
     void FixedUpdate()
@@ -41,59 +43,59 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        if (CheatConsole.changeCamera == false)
+        if (CheatConsole.changeCamera == true)
         {
             // move 90 degrees right (press only "D" or "D" + "W" + "S")
             if ((Input.GetKey("d") && !Input.GetKey("w") && !Input.GetKey("s")) || (Input.GetKey("d") && Input.GetKey("w") && Input.GetKey("s")))
             {
                 heading = new Vector3(0, 0, -1);
-                inputScale = Mathf.Abs(adInput);
+                inputScale = Mathf.Abs(horizontalInput);
             }
             // move 90 degrees left (press only "A" or "A" + "W" + "S")
             else if ((Input.GetKey("a") && !Input.GetKey("w") && !Input.GetKey("s")) || (Input.GetKey("a") && Input.GetKey("w") && Input.GetKey("s")))
             {
                 heading = new Vector3(0, 0, 1);
-                inputScale = Mathf.Abs(adInput);
+                inputScale = Mathf.Abs(horizontalInput);
             }
             // move 0 degree forward (press only "W" or "W" + "A" + "D")
             else if ((Input.GetKey("w") && !Input.GetKey("a") && !Input.GetKey("d")) || (Input.GetKey("w") && Input.GetKey("a") && Input.GetKey("d")))
             {
                 heading = new Vector3(1, 0, 0);
-                inputScale = Mathf.Abs(wsInput);
+                inputScale = Mathf.Abs(verticalInput);
             }
             // move 180 degrees backward (press only "S" or "S" + "A" + "D")
             else if ((Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d")) || (Input.GetKey("s") && Input.GetKey("a") && Input.GetKey("d")))
             {
                 heading = new Vector3(-1, 0, 0);
-                inputScale = Mathf.Abs(wsInput);
+                inputScale = Mathf.Abs(verticalInput);
             }
             // move 45 degrees right (press "W" + "D")
             else if (Input.GetKey("w") && Input.GetKey("d"))
             {
                 heading = new Vector3(1, 0, -1);
                 heading = heading.normalized;
-                inputScale = (Mathf.Abs(wsInput) + Mathf.Abs(adInput)) / 2.0f;
+                inputScale = (Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput)) / 2.0f;
             }
             // move 45 degrees left (press "W" + "A")
             else if (Input.GetKey("w") && Input.GetKey("a"))
             {
                 heading = new Vector3(1, 0, 1);
                 heading = heading.normalized;
-                inputScale = (Mathf.Abs(wsInput) + Mathf.Abs(adInput)) / 2.0f;
+                inputScale = (Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput)) / 2.0f;
             }
             // move 135 degrees right (press "S" + "D")
             else if (Input.GetKey("s") && Input.GetKey("d"))
             {
                 heading = new Vector3(-1, 0, -1);
                 heading = heading.normalized;
-                inputScale = (Mathf.Abs(wsInput) + Mathf.Abs(adInput)) / 2.0f;
+                inputScale = (Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput)) / 2.0f;
             }
             // move 135 degrees left (press "S" + "A")
             else if (Input.GetKey("s") && Input.GetKey("a"))
             {
                 heading = new Vector3(-1, 0, 1);
                 heading = heading.normalized;
-                inputScale = (Mathf.Abs(wsInput) + Mathf.Abs(adInput)) / 2.0f;
+                inputScale = (Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput)) / 2.0f;
             }
             // stand still
             else
@@ -108,7 +110,20 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            // perform movement
+            heading = PlayerTransform.forward;
+            //Debug.Log(heading);
+            movement = heading * verticalInput * moveScale;
+            PlayerRigidbody.velocity = new Vector3(movement[0], PlayerRigidbody.velocity[1], movement[2]);
 
+            // perform rotation
+            float rotationAmount = horizontalInput * rotationSpeed;
+            Vector3 rotation = PlayerTransform.rotation.eulerAngles + new Vector3(0f, rotationAmount, 0f);
+            PlayerTransform.rotation = Quaternion.Euler(rotation);
+
+            //Vector3 rotation = new Vector3(0f, rotationAmount, 0f);
+            //PlayerTransform.rotation = Quaternion.Lerp(PlayerTransform.rotation, Quaternion.Euler(rotation), smoothFactor);
+            CameraController.rotateCamera(PlayerViewCamera, horizontalInput, rotationSpeed);
         }
     }
 }
