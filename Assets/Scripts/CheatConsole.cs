@@ -20,6 +20,7 @@ public class CheatConsole : MonoBehaviour
 
     // open light related
     public GameObject DirectionalLightObject;
+    public GameObject Flashlight;
     public Light DirectionalLight;
     public Material daySkybox;
     public Material nightSkybox;
@@ -119,7 +120,13 @@ public class CheatConsole : MonoBehaviour
         openLight = true;
         CheatMessage.enabled = true;
 
+        // open flashlight
+        Flashlight.SetActive(false);
+
+        // set skybox
         UnityEngine.RenderSettings.skybox = daySkybox;
+        UnityEngine.RenderSettings.reflectionIntensity = 1.0f;
+        UnityEngine.RenderSettings.ambientIntensity = 1.0f;
         DirectionalLight.intensity = 1.0f;
     }
 
@@ -158,7 +165,10 @@ public class CheatConsole : MonoBehaviour
     {
         // reset light
         UnityEngine.RenderSettings.skybox = nightSkybox;
-        DirectionalLight.intensity = 0.1f;
+        UnityEngine.RenderSettings.reflectionIntensity = 0.05f;
+        UnityEngine.RenderSettings.ambientIntensity = 0.0f;
+        DirectionalLight.intensity = 0f;
+        Flashlight.SetActive(true);
 
         // reset camera
         TopDownCamera.enabled = false;
