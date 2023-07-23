@@ -125,20 +125,24 @@ public class CheatConsole : MonoBehaviour
 
     void ChangeCamera()
     {
-        changeCamera = false;
+        changeCamera = true;
         CheatMessage.enabled = true;
 
         TopDownCamera.enabled = true;
         PlayerViewCamera.enabled = false;
 
         Vector3 currentRotation = PlayerTransform.eulerAngles;
-        currentRotation.y = 0f;
+        currentRotation.y = -90.0f;
         PlayerTransform.eulerAngles = currentRotation;
+
+        currentRotation = TopDownCamera.transform.eulerAngles;
+        currentRotation.y = 90.0f;
+        TopDownCamera.transform.eulerAngles = currentRotation;
     }
 
     void ShowMap()
     {
-        showMap = false;
+        showMap = true;
         CheatMessage.enabled = true;
     }
 

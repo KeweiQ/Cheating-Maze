@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
             //Vector3 rotation = new Vector3(0f, rotationAmount, 0f);
             //PlayerTransform.rotation = Quaternion.Lerp(PlayerTransform.rotation, Quaternion.Euler(rotation), smoothFactor);
-            CameraController.rotateCamera(PlayerViewCamera, horizontalInput, rotationSpeed);
+            //CameraController.RotateCamera(PlayerViewCamera, horizontalInput, rotationSpeed);
         }
     }
 }

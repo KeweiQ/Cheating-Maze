@@ -36,7 +36,7 @@ public class GameStatus : MonoBehaviour
         if (start == true)
         {
             secondsCount += Time.deltaTime;
-            Timer.text = formatTime(secondsCount);
+            Timer.text = FormatTime(secondsCount);
         }
 
         // if win, pause game        
@@ -67,16 +67,16 @@ public class GameStatus : MonoBehaviour
             }
         }
     }
-    string formatTime(float secondsCount)
+    string FormatTime(float secondsCount)
     {
         if (secondsCount <= 0)
         {
             return "00:00";
         }
-        return $"{padInt((int)(secondsCount / 60))}:{padInt((int)(secondsCount % 60))}";
+        return $"{PadInt((int)(secondsCount / 60))}:{PadInt((int)(secondsCount % 60))}";
     }
 
-    public string padInt(int time)
+    public string PadInt(int time)
     {
         if (time < 10)
         {
@@ -105,7 +105,7 @@ public class GameStatus : MonoBehaviour
         }
         else if (type == "win")
         {
-            WinMessage.text = "You win!\nTime used: " + formatTime(secondsCount) + "\nPress \"R\" to restart";
+            WinMessage.text = "You win!\nTime used: " + FormatTime(secondsCount) + "\nPress \"R\" to restart";
             WinMessage.enabled = true;
         }
     }

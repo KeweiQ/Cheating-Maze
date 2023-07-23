@@ -8,15 +8,12 @@ public class CameraController : MonoBehaviour
     public Transform PlayerTransform;
     public Transform CameraTransform;
 
-    // relative position between camera and player
-    public Vector3 cameraOffset;
-
     // smooth factor of moving camera and following player
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 0.5f;
 
     // camera zoom related
-    public Transform Obstruction;
+    private RaycastHit rayHit;
     public float zoomSpeed = 1.0f;
     public float defaultDistance;
     public float minDistance = 1.0f;
@@ -31,12 +28,9 @@ public class CameraController : MonoBehaviour
     {
         CameraTransform = GetComponent<Transform>();
 
-        // record relative position between camera and player
-        this.cameraOffset = CameraTransform.position - PlayerTransform.position;
-        // set default obstruction
-        Obstruction = PlayerTransform;
         // change player transform to focus point child element (if change directly in unity there will be bugs)
         // PlayerTransform = PlayerTransform.Find("Focus");
+
         // calculate default distance from camera to player
         defaultDistance = Vector3.Distance(PlayerTransform.position, CameraTransform.position);
     }
@@ -45,49 +39,48 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // let camera follow player
-        Vector3 newPosition = PlayerTransform.position + this.cameraOffset;
-        CameraTransform.position = Vector3.Slerp(CameraTransform.position, newPosition, smoothFactor);
+        //Vector3 newPosition = PlayerTransform.position + this.cameraOffset;
+        //CameraTransform.position = Vector3.Slerp(CameraTransform.position, newPosition, smoothFactor);
 
         // let camera focus on character
-        this.transform.LookAt(PlayerTransform.position);
+        //CameraTransform.LookAt(PlayerTransform.position);
 
         // zoom camera if obstructed
-        viewObstructed();
+        // ViewObstructed();
     }
 
-    public static void rotateCamera(GameObject Camera, float horizontalInput, float rotationSpeed)
+    public static void RotateCamera(GameObject Camera, float horizontalInput, float rotationSpeed)
     {
         float rotationAmount = horizontalInput * rotationSpeed;
         Vector3 rotation = Camera.transform.rotation.eulerAngles + new Vector3(0f, rotationAmount, 0f);
         Camera.transform.rotation = Quaternion.Euler(rotation);
-
-        //Vector3 rotation = new Vector3(0f, rotationAmount, 0f);
-        //Camera.transform.rotation = Quaternion.Lerp(Camera.transform.rotation, Quaternion.Euler(rotation), smoothFactor);
     }
 
-    public void viewObstructed()
+    public void ViewObstructed()
     {
         RaycastHit hit;
 
         // there's some obstruction between player and camera
-        if (Physics.Raycast(PlayerTransform.position, CameraTransform.position - PlayerTransform.position, out hit, defaultDistance))
+        if (Physics.Raycast(PlayerTransform.position, CameraTransform.position - PlayerTransform.position, out hit, defaultDistance + 0.1f))
         {
+            Debug.Log("if");
+            rayHit = hit;
+
             if (hit.collider.gameObject.tag == "Map")
             {
-                Obstruction = hit.transform;
-                // set obstructing object to transparent (need to find the right render or this won't work) (may not need at all)
-                // Obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                // set obstructing object to transparent (need further debug)
+                // hit.collider.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
                 if (Vector3.Distance(CameraTransform.position, PlayerTransform.position) > minDistance)
                 {
-                    // calculate direction and distance of zooming in
-                    Vector3 direction = cameraOffset.normalized;
-                    float distance = Vector3.Distance(PlayerTransform.position, CameraTransform.position) - hit.distance + 0.2f;
+                    // calculate direction and distance of zooming
+                    float distance = Vector3.Distance(PlayerTransform.position, CameraTransform.position) - hit.distance;// + 0.2f;
+                    //
 
-                    // zoom in
-                    CameraTransform.position += CameraTransform.forward * distance;
+                    // zoom
+                    CameraTransform.position += distance * (PlayerTransform.position - CameraTransform.position).normalized; // CameraTransform.forward.normalized;
 
-                    // smoot camera zooming (need further debugging)
+                    // smooth camera zooming (need further debugging)
                     //lerpTimer += Time.deltaTime;
                     //float t = Mathf.Clamp01(lerpTimer / lerpDuration);
 
@@ -116,25 +109,8 @@ public class CameraController : MonoBehaviour
         // there's no obstruction between player and camera
         else
         {
-            // set obstructing object back to normal (need to find the right render or this won't work) (may not need at all)
-            // if (Obstruction.gameObject.tag != "Player") {
-            //     Obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-            // }
-
-            if (Vector3.Distance(CameraTransform.position, PlayerTransform.position) < defaultDistance)
-            {
-                // calculate direction and distance of zooming out
-                Vector3 direction = cameraOffset.normalized;
-                float distance = Vector3.Distance(PlayerTransform.position, CameraTransform.position) - hit.distance + 0.2f;
-
-                // zoom out
-                CameraTransform.position -= CameraTransform.forward * distance;
-
-                // smoot camera zooming (need further debugging)
-                //lerpTimer += Time.deltaTime;
-                //float t = Mathf.Clamp01(lerpTimer / lerpDuration);
-                //CameraTransform.position = Vector3.Lerp(CameraTransform.position, CameraTransform.position - CameraTransform.forward * distance, t);
-            }
+            // set obstructing object back to normal (need further debug)
+            // rayHit.collider.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         }
     }
 }
