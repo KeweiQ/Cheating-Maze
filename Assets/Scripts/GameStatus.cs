@@ -8,12 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameStatus : MonoBehaviour
 {
     // game status variables
+    public static bool welcome = false;
     public static bool start = false;
     public static bool win = false;
     private bool pause = false;
     private float secondsCount = 0.0f;
 
     // UI texts
+    public TextMeshProUGUI WelcomeMessage;
     public TextMeshProUGUI PauseMessage;
     public TextMeshProUGUI WinMessage;
     public TextMeshProUGUI Timer;
@@ -27,11 +29,28 @@ public class GameStatus : MonoBehaviour
         // hide UI elements
         PauseMessage.enabled = false;
         WinMessage.enabled = false;
+        Timer.enabled = false;
+
+        // show welcome message
+        welcome = true;
+        WelcomeMessage.enabled = true;
+        Time.timeScale = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (welcome == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                welcome = false;
+                WelcomeMessage.enabled = false;
+                Timer.enabled = true;
+                Time.timeScale = 1.0f;
+            }
+        }
+
         // if start, update timer
         if (start == true)
         {
