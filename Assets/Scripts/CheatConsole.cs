@@ -20,6 +20,7 @@ public class CheatConsole : MonoBehaviour
     public TextMeshProUGUI CheatSwitchMessage;
     public TextMeshProUGUI CheatMessage;
     public TextMeshProUGUI CloseMessage;
+    public TextMeshProUGUI ResetMessage;
     public GameObject HintImage;
 
     // open light related
@@ -193,9 +194,9 @@ public class CheatConsole : MonoBehaviour
         }
         if (changeCamera == true)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                CloseMessage.enabled = false;
+                ResetMessage.enabled = false;
                 TopDownCamera.enabled = false;
                 PlayerViewCamera.enabled = true;
                 changeCamera = false;
@@ -205,7 +206,6 @@ public class CheatConsole : MonoBehaviour
 
     void ReadHint()
     {
-        CloseMessage.text = "Press \"E\" to close";
         CloseMessage.enabled = true;
         HintImage.SetActive(true);
 
@@ -229,8 +229,7 @@ public class CheatConsole : MonoBehaviour
 
     void ChangeCamera()
     {
-        CloseMessage.text = "Press \"E\" to disable top-down camera";
-        CloseMessage.enabled = true;
+        ResetMessage.enabled = true;
 
         changeCamera = true;
         cameraIndicator = 2;
@@ -262,7 +261,6 @@ public class CheatConsole : MonoBehaviour
     void ShowPath()
     {
         showPath = true;
-        CloseMessage.text = "Press \"E\" to close";
         CheatMessage.enabled = true;
 
         Path.SetActive(true);
@@ -290,6 +288,7 @@ public class CheatConsole : MonoBehaviour
 
         // hide cheat message
         CheatMessage.enabled = false;
+        ResetMessage.enabled = false;
 
         // reset cheat function indicators
         openLight = false;
