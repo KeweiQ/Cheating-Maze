@@ -9,6 +9,7 @@ public class CheatConsole : MonoBehaviour
     private Transform PlayerTransform;
 
     // cheat function indicators
+    public static bool showHint = false;
     public static bool openLight = false;
     public static bool changeCamera = false;
     public static bool showMap = false;
@@ -17,6 +18,8 @@ public class CheatConsole : MonoBehaviour
     // cheat messages
     public TextMeshProUGUI CheatSwitchMessage;
     public TextMeshProUGUI CheatMessage;
+    public TextMeshProUGUI CloseMessage;
+    public GameObject HintImage;
 
     // open light related
     public GameObject DirectionalLightObject;
@@ -30,7 +33,7 @@ public class CheatConsole : MonoBehaviour
     public Camera PlayerViewCamera;
 
     // show map related
-    // public GameObject Map;
+    public GameObject MapImage;
 
     // show path related
     public GameObject Path;
@@ -51,16 +54,20 @@ public class CheatConsole : MonoBehaviour
         // turn off cheat when game start
         TurnOffCheat();
         CheatSwitchMessage.enabled = false;
+        CloseMessage.enabled = false;
+        HintImage.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        MonitorImage();
         MonitorSwitch();
     }
 
     void MonitorSwitch()
     {
+        Debug.Log(PlayerCollision.onSwitch);
         if (PlayerCollision.onSwitch == "OpenLight")
         {
             CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to open the map light";
@@ -88,7 +95,15 @@ public class CheatConsole : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ShowMap();
+                if (Time.timeScale != 0.0f)
+                {
+                    ShowMap();
+                }
+            }
+
+            if (showMap == false)
+            {
+                Time.timeScale = 1.0f;
             }
         }
         else if (PlayerCollision.onSwitch == "ShowPath")
@@ -99,6 +114,24 @@ public class CheatConsole : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ShowPath();
+            }
+        }
+        else if (PlayerCollision.onSwitch == "ReadHint")
+        {
+            CheatSwitchMessage.text = "Press \"E\" to read";
+            CheatSwitchMessage.enabled = true;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (Time.timeScale != 0.0f)
+                {
+                    ReadHint();
+                }
+            }
+
+            if (HintImage.activeSelf == false)
+            {
+                Time.timeScale = 1.0f;
             }
         }
         else
@@ -113,6 +146,35 @@ public class CheatConsole : MonoBehaviour
                 TurnOffCheat();
             }
         }
+    }
+
+    void MonitorImage()
+    {
+        if (HintImage.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                CloseMessage.enabled = false;
+                HintImage.SetActive(false);
+            }
+        }
+        if (MapImage.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                CloseMessage.enabled = false;
+                MapImage.SetActive(false);
+                showMap = false;
+            }
+        }
+    }
+
+    void ReadHint()
+    {
+        CloseMessage.enabled = true;
+        HintImage.SetActive(true);
+
+        Time.timeScale = 0.0f;
     }
 
     void OpenLight()
@@ -151,6 +213,11 @@ public class CheatConsole : MonoBehaviour
     {
         showMap = true;
         CheatMessage.enabled = true;
+
+        CloseMessage.enabled = true;
+        MapImage.SetActive(true);
+
+        Time.timeScale = 0.0f;
     }
 
     void ShowPath()
@@ -173,6 +240,9 @@ public class CheatConsole : MonoBehaviour
         // reset camera
         TopDownCamera.enabled = false;
         PlayerViewCamera.enabled = true;
+
+        // hide map
+        MapImage.SetActive(false);
         
         // hide path
         Path.SetActive(false);
@@ -185,5 +255,5 @@ public class CheatConsole : MonoBehaviour
         changeCamera = false;
         showMap = false;
         showPath = false;
-}
+    }
 }
