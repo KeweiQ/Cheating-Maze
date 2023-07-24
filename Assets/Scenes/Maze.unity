@@ -4927,7 +4927,7 @@ GameObject:
   - component: {fileID: 378026026}
   - component: {fileID: 378026025}
   - component: {fileID: 378026024}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: OpenLight
   m_TagString: OpenLight
   m_Icon: {fileID: 0}
@@ -11676,7 +11676,7 @@ GameObject:
   - component: {fileID: 1039769390}
   - component: {fileID: 1039769389}
   - component: {fileID: 1039769388}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ShowMap
   m_TagString: ShowMap
   m_Icon: {fileID: 0}
@@ -12481,7 +12481,7 @@ GameObject:
   - component: {fileID: 1139847241}
   - component: {fileID: 1139847240}
   - component: {fileID: 1139847239}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ChangeCamera
   m_TagString: ChangeCamera
   m_Icon: {fileID: 0}
@@ -17128,7 +17128,7 @@ GameObject:
   - component: {fileID: 1561268873}
   - component: {fileID: 1561268872}
   - component: {fileID: 1561268871}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ShowPath
   m_TagString: ShowPath
   m_Icon: {fileID: 0}
@@ -20001,7 +20001,7 @@ GameObject:
   - component: {fileID: 1824956319}
   - component: {fileID: 1824956318}
   - component: {fileID: 1824956317}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hint
   m_TagString: ReadHint
   m_Icon: {fileID: 0}
@@ -20017,7 +20017,7 @@ Transform:
   m_GameObject: {fileID: 1824956315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -162, y: 15, z: 15}
-  m_LocalScale: {x: 4, y: 500, z: 4}
+  m_LocalScale: {x: 4, y: 2, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661387495}

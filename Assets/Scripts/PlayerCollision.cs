@@ -50,6 +50,10 @@ public class PlayerCollision : MonoBehaviour
         {
             onSwitch = "ShowPath";
         }
+        if (other.CompareTag("ReadHint"))
+        {
+            onSwitch = "ReadHint";
+        }
     }
 
     private void OnTriggerExit(Collider other)

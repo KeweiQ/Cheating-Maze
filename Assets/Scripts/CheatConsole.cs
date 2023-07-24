@@ -7,6 +7,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class CheatConsole : MonoBehaviour
 {
     private Transform PlayerTransform;
+    private int cameraIndicator = 1;
 
     // cheat function indicators
     public static bool showHint = false;
@@ -61,13 +62,12 @@ public class CheatConsole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MonitorImage();
+        MonitorClose();
         MonitorSwitch();
     }
 
     void MonitorSwitch()
     {
-        Debug.Log(PlayerCollision.onSwitch);
         if (PlayerCollision.onSwitch == "OpenLight")
         {
             CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to open the map light";
@@ -80,18 +80,38 @@ public class CheatConsole : MonoBehaviour
         }
         else if (PlayerCollision.onSwitch == "ChangeCamera")
         {
+
             CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to change the camera to top-down view";
-            CheatSwitchMessage.enabled = true;
+            if (PlayerViewCamera.enabled == true)
+            {
+                CheatSwitchMessage.enabled = true;
+            }
+            else
+            {
+                CheatSwitchMessage.enabled = false;
+            }
             
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ChangeCamera();
+                if (cameraIndicator == 1)
+                {
+                    ChangeCamera();
+                }
+            }
+
+            if (cameraIndicator == 2 && changeCamera == false)
+            {
+                cameraIndicator = 1;
             }
         }
         else if (PlayerCollision.onSwitch == "ShowMap")
         {
             CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to show the maze map";
             CheatSwitchMessage.enabled = true;
+            if (MapImage.activeSelf == true)
+            {
+                CheatSwitchMessage.enabled = false;
+            }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -120,8 +140,12 @@ public class CheatConsole : MonoBehaviour
         {
             CheatSwitchMessage.text = "Press \"E\" to read";
             CheatSwitchMessage.enabled = true;
+            if (HintImage.activeSelf == true)
+            {
+                CheatSwitchMessage.enabled = false;
+            }
 
-            if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E))
             {
                 if (Time.timeScale != 0.0f)
                 {
@@ -148,7 +172,7 @@ public class CheatConsole : MonoBehaviour
         }
     }
 
-    void MonitorImage()
+    void MonitorClose()
     {
         if (HintImage.activeSelf == true)
         {
@@ -167,10 +191,21 @@ public class CheatConsole : MonoBehaviour
                 showMap = false;
             }
         }
+        if (changeCamera == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                CloseMessage.enabled = false;
+                TopDownCamera.enabled = false;
+                PlayerViewCamera.enabled = true;
+                changeCamera = false;
+            }
+        }
     }
 
     void ReadHint()
     {
+        CloseMessage.text = "Press \"E\" to close";
         CloseMessage.enabled = true;
         HintImage.SetActive(true);
 
@@ -194,7 +229,11 @@ public class CheatConsole : MonoBehaviour
 
     void ChangeCamera()
     {
+        CloseMessage.text = "Press \"E\" to disable top-down camera";
+        CloseMessage.enabled = true;
+
         changeCamera = true;
+        cameraIndicator = 2;
         CheatMessage.enabled = true;
 
         TopDownCamera.enabled = true;
@@ -223,6 +262,7 @@ public class CheatConsole : MonoBehaviour
     void ShowPath()
     {
         showPath = true;
+        CloseMessage.text = "Press \"E\" to close";
         CheatMessage.enabled = true;
 
         Path.SetActive(true);
@@ -240,6 +280,7 @@ public class CheatConsole : MonoBehaviour
         // reset camera
         TopDownCamera.enabled = false;
         PlayerViewCamera.enabled = true;
+        cameraIndicator = 1;
 
         // hide map
         MapImage.SetActive(false);

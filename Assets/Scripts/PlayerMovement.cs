@@ -121,8 +121,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotation = PlayerTransform.rotation.eulerAngles + new Vector3(0f, rotationAmount, 0f);
             PlayerTransform.rotation = Quaternion.Euler(rotation);
 
-            //Vector3 rotation = new Vector3(0f, rotationAmount, 0f);
-            //PlayerTransform.rotation = Quaternion.Lerp(PlayerTransform.rotation, Quaternion.Euler(rotation), smoothFactor);
             //CameraController.RotateCamera(PlayerViewCamera, horizontalInput, rotationSpeed);
         }
     }
