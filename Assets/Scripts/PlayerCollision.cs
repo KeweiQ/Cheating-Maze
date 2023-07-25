@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    // trigger indicator (for cheat console)
     public static string onSwitch = "";
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        onSwitch = "";
     }
 
     // Update is called once per frame
@@ -20,11 +21,13 @@ public class PlayerCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // start timer when entering the maze
         if (collision.collider.CompareTag("Start"))
         {
             GameStatus.start = true;
             collision.collider.gameObject.SetActive(false);
         }
+        // stop timer when reaching the exit
         else if (collision.collider.CompareTag("End"))
         {
             GameStatus.win = true;
@@ -34,6 +37,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // identify trigger type
         if (other.CompareTag("OpenLight"))
         {
             onSwitch = "OpenLight";

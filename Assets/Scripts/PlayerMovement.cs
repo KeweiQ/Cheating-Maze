@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        // top-down view movement
         if (CheatConsole.changeCamera == true)
         {
             // move 90 degrees right (press only "D" or "D" + "W" + "S")
@@ -108,11 +109,11 @@ public class PlayerMovement : MonoBehaviour
             movement = heading * inputScale * moveScale;
             PlayerRigidbody.velocity = new Vector3(movement[0], PlayerRigidbody.velocity[1], movement[2]);
         }
+        // first-person movement
         else
         {
             // perform movement
             heading = PlayerTransform.forward;
-            //Debug.Log(heading);
             movement = heading * verticalInput * moveScale;
             PlayerRigidbody.velocity = new Vector3(movement[0], PlayerRigidbody.velocity[1], movement[2]);
 

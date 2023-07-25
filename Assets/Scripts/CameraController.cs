@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     public float defaultDistance;
     public float minDistance = 1.0f;
 
-    // smooth zoom parameters
+    // smooth zooming parameters
     //public float lerpDuration = 0.5f;
     //private float lerpTimer = 0f;
     //private bool zoomProgress = false;
@@ -26,18 +26,20 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // get objects
         CameraTransform = GetComponent<Transform>();
-
-        // change player transform to focus point child element (if change directly in unity there will be bugs)
-        // PlayerTransform = PlayerTransform.Find("Focus");
 
         // calculate default distance from camera to player
         defaultDistance = Vector3.Distance(PlayerTransform.position, CameraTransform.position);
+
+        // change player transform to focus point child element (if change directly in unity there will be bugs)
+        // PlayerTransform = PlayerTransform.Find("Focus");
     }
 
     // Update is called once per frame
     void Update()
     {
+        // THE FOLLOWING CODE ARE THIRD-PERSON VIEW RELATED AND CURRENTLY NOT USED IN THIS GAME
         // let camera follow player
         //Vector3 newPosition = PlayerTransform.position + this.cameraOffset;
         //CameraTransform.position = Vector3.Slerp(CameraTransform.position, newPosition, smoothFactor);
@@ -60,10 +62,9 @@ public class CameraController : MonoBehaviour
     {
         RaycastHit hit;
 
-        // there's some obstruction between player and camera
+        // some obstruction between player and camera
         if (Physics.Raycast(PlayerTransform.position, CameraTransform.position - PlayerTransform.position, out hit, defaultDistance + 0.1f))
         {
-            Debug.Log("if");
             rayHit = hit;
 
             if (hit.collider.gameObject.tag == "Map")
@@ -74,8 +75,7 @@ public class CameraController : MonoBehaviour
                 if (Vector3.Distance(CameraTransform.position, PlayerTransform.position) > minDistance)
                 {
                     // calculate direction and distance of zooming
-                    float distance = Vector3.Distance(PlayerTransform.position, CameraTransform.position) - hit.distance;// + 0.2f;
-                    //
+                    float distance = Vector3.Distance(PlayerTransform.position, CameraTransform.position) - hit.distance;
 
                     // zoom
                     CameraTransform.position += distance * (PlayerTransform.position - CameraTransform.position).normalized; // CameraTransform.forward.normalized;
@@ -106,7 +106,7 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
-        // there's no obstruction between player and camera
+        // no obstruction between player and camera
         else
         {
             // set obstructing object back to normal (need further debug)

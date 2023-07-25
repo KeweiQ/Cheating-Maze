@@ -11,7 +11,7 @@ public class GameStatus : MonoBehaviour
     public static bool welcome = false;
     public static bool start = false;
     public static bool win = false;
-    private bool pause = false;
+    public static bool pause = false;
     private float secondsCount = 0.0f;
 
     // UI texts
@@ -40,6 +40,7 @@ public class GameStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // show welcome message at the beginning
         if (welcome == true)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -65,7 +66,7 @@ public class GameStatus : MonoBehaviour
         }
 
         // manually pause/resume game
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && welcome == false)
         {
             if (pause == false)
             {
