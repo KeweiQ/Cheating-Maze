@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Experimental.GlobalIllumination;
 
 public class CheatConsole : MonoBehaviour
@@ -17,11 +18,15 @@ public class CheatConsole : MonoBehaviour
     public static bool showPath = false;
 
     // cheat messages
-    public TextMeshProUGUI CheatSwitchMessage;
-    public TextMeshProUGUI CheatMessage;
-    public TextMeshProUGUI CloseMessage;
-    public TextMeshProUGUI ResetMessage;
+    public GameObject CheatSwitchMessage;
+    public GameObject CheatMessage;
+    public GameObject CloseMessage;
+    public GameObject ResetMessage;
     public GameObject HintImage;
+    public Text CheatSwitchMessageText;
+    public Text CheatMessageText;
+    public Text CloseMessageText;
+    public Text ResetMessageText;
 
     // open light related
     public GameObject DirectionalLightObject;
@@ -47,13 +52,19 @@ public class CheatConsole : MonoBehaviour
         PlayerTransform = GetComponent<Transform>();
         DirectionalLight = DirectionalLightObject.GetComponent<Light>();
 
+        // get text components
+        CheatSwitchMessageText = CheatSwitchMessage.GetComponent<Text>();
+        CheatMessageText = CheatMessage.GetComponent<Text>();
+        CloseMessageText = CloseMessage.GetComponent<Text>();
+        ResetMessageText = ResetMessage.GetComponent<Text>();
+
         // Store the default skybox material before any modifications occur
         daySkybox = UnityEngine.RenderSettings.skybox;
 
         // turn off cheats when game start
         TurnOffCheat();
-        CheatSwitchMessage.enabled = false;
-        CloseMessage.enabled = false;
+        CheatSwitchMessage.SetActive(false);
+        CloseMessage.SetActive(false);
         HintImage.SetActive(false);
     }
 
@@ -69,11 +80,11 @@ public class CheatConsole : MonoBehaviour
         if (PlayerCollision.onSwitch == "OpenLight")
         {
             // show cheat switch message when player is in designed area and game is not paused
-            CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to open the map light";
-            CheatSwitchMessage.enabled = true;
+            CheatSwitchMessageText.text = "Cheat mode switch\nPress \"E\" to open the map light";
+            CheatSwitchMessage.SetActive(true);
             if (openLight == true || GameStatus.pause == true)
             {
-                CheatSwitchMessage.enabled = false;
+                CheatSwitchMessage.SetActive(false);
             }
 
             // open light when press E
@@ -85,11 +96,11 @@ public class CheatConsole : MonoBehaviour
         else if (PlayerCollision.onSwitch == "ChangeCamera")
         {
             // show cheat switch message when player is in designed area and game is not paused and camera hasn't been changed
-            CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to change the camera to top-down view";
-            CheatSwitchMessage.enabled = true;
+            CheatSwitchMessageText.text = "Cheat mode switch\nPress \"E\" to change the camera to top-down view";
+            CheatSwitchMessage.SetActive(true);
             if (PlayerViewCamera.enabled == false || GameStatus.pause == true)
             {
-                CheatSwitchMessage.enabled = false;
+                CheatSwitchMessage.SetActive(false);
             }
 
             // change camera when press E (not change if already activated)
@@ -104,17 +115,17 @@ public class CheatConsole : MonoBehaviour
             // re-show reset message when game resumed
             if (PlayerViewCamera.enabled == false && GameStatus.pause == false)
             {
-                ResetMessage.enabled = true;
+                ResetMessage.SetActive(true);
             }
         }
         else if (PlayerCollision.onSwitch == "ShowMap")
         {
             // show cheat switch message when player is in designed area and game is not paused
-            CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to show the maze map";
-            CheatSwitchMessage.enabled = true;
+            CheatSwitchMessageText.text = "Cheat mode switch\nPress \"E\" to show the maze map";
+            CheatSwitchMessage.SetActive(true);
             if (MapImage.activeSelf == true || GameStatus.pause == true)
             {
-                CheatSwitchMessage.enabled = false;
+                CheatSwitchMessage.SetActive(false);
             }
 
             // show image when press E (not show if already activated)
@@ -142,11 +153,11 @@ public class CheatConsole : MonoBehaviour
         else if (PlayerCollision.onSwitch == "ShowPath")
         {
             // show cheat switch message when player is in designed area and game is not paused and function hasen't been activated
-            CheatSwitchMessage.text = "Cheat mode switch\nPress \"E\" to show the solution path";
-            CheatSwitchMessage.enabled = true;
+            CheatSwitchMessageText.text = "Cheat mode switch\nPress \"E\" to show the solution path";
+            CheatSwitchMessage.SetActive(true);
             if (showPath == true || GameStatus.pause == true)
             {
-                CheatSwitchMessage.enabled = false;
+                CheatSwitchMessage.SetActive(false);
             }
 
             // show path when press E
@@ -158,11 +169,11 @@ public class CheatConsole : MonoBehaviour
         else if (PlayerCollision.onSwitch == "ReadHint")
         {
             // show cheat switch message when player is in designed area and game is not paused
-            CheatSwitchMessage.text = "Press \"E\" to read";
-            CheatSwitchMessage.enabled = true;
+            CheatSwitchMessageText.text = "Press \"E\" to read";
+            CheatSwitchMessage.SetActive(true);
             if (HintImage.activeSelf == true || GameStatus.pause == true)
             {
-                CheatSwitchMessage.enabled = false;
+                CheatSwitchMessage.SetActive(false);
             }
 
             // show image when press E (not show if already activated)
@@ -189,13 +200,13 @@ public class CheatConsole : MonoBehaviour
         }
         else
         {
-            CheatSwitchMessage.enabled = false;
+            CheatSwitchMessage.SetActive(false);
         }
 
         // turn off all cheats
-        if (CheatMessage.enabled == true)
+        if (CheatMessage.activeSelf == true)
         {
-            if (Input.GetKeyDown(KeyCode.C) && GameStatus.pause == false)
+            if (Input.GetKeyDown(KeyCode.C) && GameStatus.pause == false && HintImage.activeSelf == false)
             {
                 TurnOffCheat();
             }
@@ -209,7 +220,7 @@ public class CheatConsole : MonoBehaviour
             // hide image when press E or pause game
             if (Input.GetKeyDown(KeyCode.E) || GameStatus.pause == true)
             {
-                CloseMessage.enabled = false;
+                CloseMessage.SetActive(false);
                 HintImage.SetActive(false);
             }
         }
@@ -218,7 +229,7 @@ public class CheatConsole : MonoBehaviour
             // hide image when press E or pause game
             if (Input.GetKeyDown(KeyCode.E) || GameStatus.pause == true)
             {
-                CloseMessage.enabled = false;
+                CloseMessage.SetActive(false);
                 MapImage.SetActive(false);
             }
         }
@@ -227,14 +238,14 @@ public class CheatConsole : MonoBehaviour
             // reset camera when press R
             if (Input.GetKeyDown(KeyCode.R) && GameStatus.pause == false)
             {
-                ResetMessage.enabled = false;
+                ResetMessage.SetActive(false);
                 TopDownCamera.enabled = false;
                 PlayerViewCamera.enabled = true;
                 changeCamera = false;
             }
             else if (GameStatus.pause == true)
             {
-                ResetMessage.enabled = false;
+                ResetMessage.SetActive(false);
             }
         }
     }
@@ -245,7 +256,7 @@ public class CheatConsole : MonoBehaviour
         showHint = true;
         
         // show message
-        CloseMessage.enabled = true;
+        CloseMessage.SetActive(true);
 
         // show image
         HintImage.SetActive(true);
@@ -257,7 +268,7 @@ public class CheatConsole : MonoBehaviour
         openLight = true;
 
         // show message
-        CheatMessage.enabled = true;
+        CheatMessage.SetActive(true);
 
         // open flashlight
         Flashlight.SetActive(false);
@@ -275,8 +286,8 @@ public class CheatConsole : MonoBehaviour
         changeCamera = true;
 
         // show messages
-        CheatMessage.enabled = true;
-        ResetMessage.enabled = true;
+        CheatMessage.SetActive(true);
+        ResetMessage.SetActive(true);
 
         // update object status
         TopDownCamera.enabled = true;
@@ -299,8 +310,8 @@ public class CheatConsole : MonoBehaviour
         showMap = true;
 
         // show messages
-        CheatMessage.enabled = true;
-        CloseMessage.enabled = true;
+        CheatMessage.SetActive(true);
+        CloseMessage.SetActive(true);
 
         // show image
         MapImage.SetActive(true);
@@ -314,7 +325,7 @@ public class CheatConsole : MonoBehaviour
         showPath = true;
 
         // show message
-        CheatMessage.enabled = true;
+        CheatMessage.SetActive(true);
 
         // show path
         Path.SetActive(true);
@@ -322,6 +333,14 @@ public class CheatConsole : MonoBehaviour
 
     void TurnOffCheat()
     {
+        // hide cheat message
+        CheatMessage.SetActive(false);
+        ResetMessage.SetActive(false);
+        if (CloseMessage.activeSelf == true && MapImage.activeSelf == true)
+        {
+            CloseMessage.SetActive(false);
+        }
+
         // reset light
         UnityEngine.RenderSettings.skybox = nightSkybox;
         UnityEngine.RenderSettings.reflectionIntensity = 0.01f;
@@ -338,10 +357,6 @@ public class CheatConsole : MonoBehaviour
         
         // hide path
         Path.SetActive(false);
-
-        // hide cheat message
-        CheatMessage.enabled = false;
-        ResetMessage.enabled = false;
 
         // reset cheat function indicators
         openLight = false;
