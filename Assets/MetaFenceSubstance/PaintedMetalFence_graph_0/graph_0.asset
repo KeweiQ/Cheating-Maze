@@ -1,0 +1,575 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
+  m_Name: graph_0
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/MetaFenceSubstance/PaintedMetalFence.sbsar
+  RawData: {fileID: -244192453324840774, guid: 14a601c222fbe8a479edfd542ba151e9, type: 3}
+  Name: graph_0
+  IsRoot: 1
+  FlagedForDelete: 0
+  GUID: c44bc512-47cd-4b91-a941-1475a37e47bf
+  Index: 0
+  Input:
+  - rid: 4843816581995429920
+  - rid: 4843816581995429921
+  - rid: 4843816581995429922
+  - rid: 4843816581995429923
+  - rid: 4843816581995429924
+  - rid: 4843816581995429925
+  - rid: 4843816581995429926
+  - rid: 4843816581995429927
+  - rid: 4843816581995429928
+  - rid: 4843816581995429929
+  - rid: 4843816581995429930
+  - rid: 4843816581995429931
+  - rid: 4843816581995429932
+  - rid: 4843816581995429933
+  - rid: 4843816581995429934
+  - rid: 4843816581995429935
+  - rid: 4843816581995429936
+  - rid: 4843816581995429937
+  - rid: 4843816581995429938
+  Output:
+  - Index: 0
+    VirtualOutputIndex: 7
+    Description:
+      Identifier: basecolor_1
+      Label: basecolor_1
+      Index: 0
+      Type: 8
+      Channel: baseColor
+    OutputTexture: {fileID: 2800000, guid: 13dd123c1f69430459f45e10602c36e3, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _MainTex
+  - Index: 1
+    VirtualOutputIndex: 8
+    Description:
+      Identifier: normal_1
+      Label: normal_1
+      Index: 1
+      Type: 8
+      Channel: normal
+    OutputTexture: {fileID: 2800000, guid: ff5c2ba80fd829343a53e9ce9557d433, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 0
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _BumpMap
+  - Index: 2
+    VirtualOutputIndex: 9
+    Description:
+      Identifier: roughness_1
+      Label: roughness_1
+      Index: 2
+      Type: 8
+      Channel: roughness
+    OutputTexture: {fileID: 0}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _RoughnessMap
+  - Index: 3
+    VirtualOutputIndex: 10
+    Description:
+      Identifier: metallic_1
+      Label: metallic_1
+      Index: 3
+      Type: 8
+      Channel: metallic
+    OutputTexture: {fileID: 2800000, guid: c2ce5cefda4846847a85344b07073def, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: roughness_1
+    InvertAssignedAlpha: 1
+    Flags: 0
+    MaterialTextureTarget: _MetallicGlossMap
+  - Index: 4
+    VirtualOutputIndex: 11
+    Description:
+      Identifier: ambientOcclusion
+      Label: ambientOcclusion
+      Index: 4
+      Type: 8
+      Channel: ambientOcclusion
+    OutputTexture: {fileID: 2800000, guid: 9655309c67714f24d9cc34611ce8c970, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _OcclusionMap
+  - Index: 5
+    VirtualOutputIndex: 12
+    Description:
+      Identifier: height_1
+      Label: height_1
+      Index: 5
+      Type: 8
+      Channel: height
+    OutputTexture: {fileID: 2800000, guid: 74179d5bd8bfe1b468b515edcbc02d36, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _ParallaxMap
+  - Index: 6
+    VirtualOutputIndex: 13
+    Description:
+      Identifier: Curvature_1
+      Label: Curvature_1
+      Index: 6
+      Type: 8
+      Channel: curvature
+    OutputTexture: {fileID: 0}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: 
+  HasPhysicalSize: 0
+  PhysicalSize: {x: 0, y: 0, z: 0}
+  EnablePhysicalSize: 0
+  Thumbnail: 
+  HasThumbnail: 0
+  CurrentStatePreset: 
+  IsRuntimeOnly: 0
+  GenerateAllOutputs: 0
+  GenerateAllMipmaps: 1
+  OutputMaterial: {fileID: 2100000, guid: 8ffd421051de9524380f6f2b5809e8af, type: 2}
+  DefaultPreset: " <sbspreset pkgurl=\"pkg://PaintedMetalFence\" label=\"\" >\n 
+    <presetinput identifier=\"$outputsize\" uid=\"2362524524\" type=\"8\" value=\"10,10\"
+    />\n </sbspreset>\n"
+  MaterialShader: Standard
+  RenderTextures: 0
+  OutputRemaped: 0
+  Presets: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4843816581995429920
+      type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 0
+        Description:
+          Identifier: $outputsize
+          Label: $outputsize
+          GuiGroup: 
+          GuiDescription: 
+          Type: 5
+          WidgetType: 0
+        Data: {x: 10, y: 10}
+        NumericalDescription:
+          DefaultValue: {x: 8, y: 8}
+          MinValue: {x: 0, y: 0}
+          MaxValue: {x: 1, y: 1}
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429921
+      type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 1
+        Description:
+          Identifier: $pixelsize
+          Label: $pixelsize
+          GuiGroup: 
+          GuiDescription: 
+          Type: 1
+          WidgetType: 0
+        Data: {x: 1, y: 1}
+        NumericalDescription:
+          DefaultValue: {x: 1, y: 1}
+          MinValue: {x: 0, y: 0}
+          MaxValue: {x: 1, y: 1}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429922
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 2
+        Description:
+          Identifier: $randomseed
+          Label: $randomseed
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 0
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429923
+      type: {class: SubstanceInputTexture, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 3
+        Description:
+          Identifier: Paint
+          Label: Paint
+          GuiGroup: 
+          GuiDescription: 
+          Type: 8
+          WidgetType: 6
+        Data: {fileID: 0}
+    - rid: 4843816581995429924
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 4
+        Description:
+          Identifier: FenceType
+          Label: Fence Type
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 1
+        Data: 3
+        NumericalDescription:
+          DefaultValue: 3
+          MinValue: 1
+          MaxValue: 4
+          SliderStep: 1
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429925
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 5
+        Description:
+          Identifier: FenceDensity
+          Label: Fence Density
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 1
+        Data: 2
+        NumericalDescription:
+          DefaultValue: 2
+          MinValue: 1
+          MaxValue: 20
+          SliderStep: 1
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429926
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 6
+        Description:
+          Identifier: FenceDensity2
+          Label: Fence Density 2
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 1
+        Data: 3
+        NumericalDescription:
+          DefaultValue: 3
+          MinValue: 1
+          MaxValue: 20
+          SliderStep: 1
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429927
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 7
+        Description:
+          Identifier: Distance
+          Label: Distance
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.04
+        NumericalDescription:
+          DefaultValue: 0.04
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429928
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 8
+        Description:
+          Identifier: Smoothing
+          Label: Smoothing
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 5
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429929
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 9
+        Description:
+          Identifier: Depth
+          Label: Depth
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.51
+        NumericalDescription:
+          DefaultValue: 0.51
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429930
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 10
+        Description:
+          Identifier: FenceMaterial
+          Label: Fence Material
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 5
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 0
+          SliderStep: 0
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 10
+          EnumValues:
+          - Value: 0
+            Label: Custom
+          - Value: 2
+            Label: Gold
+          - Value: 3
+            Label: Silver
+          - Value: 4
+            Label: Aluminium
+          - Value: 5
+            Label: Iron
+          - Value: 6
+            Label: Copper
+          - Value: 7
+            Label: Titanium
+          - Value: 8
+            Label: Nickel
+          - Value: 9
+            Label: Cobalt
+          - Value: 10
+            Label: Platinum
+    - rid: 4843816581995429931
+      type: {class: SubstanceInputFloat3, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 11
+        Description:
+          Identifier: MetalColor
+          Label: Base Color
+          GuiGroup: 
+          GuiDescription: 
+          Type: 2
+          WidgetType: 3
+        Data: {x: 0.498039, y: 0.498039, z: 0.498039}
+        NumericalDescription:
+          DefaultValue: {x: 0.498039, y: 0.498039, z: 0.498039}
+          MinValue: {x: 0, y: 0, z: 0}
+          MaxValue: {x: 1, y: 1, z: 1}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429932
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 12
+        Description:
+          Identifier: Normal_Intensity
+          Label: Normal Intensity
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 26.5
+        NumericalDescription:
+          DefaultValue: 26.5
+          MinValue: 0
+          MaxValue: 60
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429933
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 13
+        Description:
+          Identifier: PaintRoughness
+          Label: Paint Roughness
+          GuiGroup: Roughness - Glossiness
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429934
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 14
+        Description:
+          Identifier: Roughness
+          Label: Metal Roughness
+          GuiGroup: Roughness - Glossiness
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429935
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 15
+        Description:
+          Identifier: Grunge
+          Label: Grunge Amount
+          GuiGroup: Roughness - Glossiness
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429936
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 16
+        Description:
+          Identifier: metal_wear
+          Label: Metal Wear Level
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429937
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 17
+        Description:
+          Identifier: metal_wear_contrast
+          Label: Metal Wear Contrast
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.12
+        NumericalDescription:
+          DefaultValue: 0.12
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 4843816581995429938
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 18
+        Description:
+          Identifier: paint_wear
+          Label: Paint wear
+          GuiGroup: 
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []

@@ -324,7 +324,7 @@ public class CheatConsole : MonoBehaviour
     {
         // reset light
         UnityEngine.RenderSettings.skybox = nightSkybox;
-        UnityEngine.RenderSettings.reflectionIntensity = 0.05f;
+        UnityEngine.RenderSettings.reflectionIntensity = 0.01f;
         UnityEngine.RenderSettings.ambientIntensity = 0.0f;
         DirectionalLight.intensity = 0f;
         Flashlight.SetActive(true);
