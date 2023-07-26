@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float inputScale;
 
     // player movement
-    private float moveScale = 20.0f;
-    private float rotationSpeed = 5.0f;
+    private float moveScale = 15.0f;
+    private float rotationSpeed = 3.5f;
     private Vector3 heading;
     private Vector3 movement;
 
