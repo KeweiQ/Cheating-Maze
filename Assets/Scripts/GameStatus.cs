@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour
@@ -15,25 +16,35 @@ public class GameStatus : MonoBehaviour
     private float secondsCount = 0.0f;
 
     // UI texts
-    public TextMeshProUGUI WelcomeMessage;
-    public TextMeshProUGUI PauseMessage;
-    public TextMeshProUGUI WinMessage;
-    public TextMeshProUGUI Timer;
+    public GameObject WelcomeMessage;
+    public GameObject PauseMessage;
+    public GameObject WinMessage;
+    public GameObject Timer;
+    public Text WelcomeMessageText;
+    public Text PauseMessageText;
+    public Text WinMessageText;
+    public Text TimerText;
 
     // Start is called before the first frame update
     void Start()
     {
         // reset timer
         secondsCount = 0.0f;
-        
+
+        // get text components
+        WelcomeMessageText = WelcomeMessage.GetComponent<Text>();
+        PauseMessageText = PauseMessage.GetComponent<Text>();
+        WinMessageText = WinMessage.GetComponent<Text>();
+        TimerText = Timer.GetComponent<Text>();
+
         // hide UI elements
-        PauseMessage.enabled = false;
-        WinMessage.enabled = false;
-        Timer.enabled = false;
+        PauseMessage.SetActive(false);
+        WinMessage.SetActive(false);
+        Timer.SetActive(false);
 
         // show welcome message
         welcome = true;
-        WelcomeMessage.enabled = true;
+        WelcomeMessage.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
@@ -46,8 +57,8 @@ public class GameStatus : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 welcome = false;
-                WelcomeMessage.enabled = false;
-                Timer.enabled = true;
+                WelcomeMessage.SetActive(false);
+                Timer.SetActive(true);
                 Time.timeScale = 1.0f;
             }
         }
@@ -56,7 +67,7 @@ public class GameStatus : MonoBehaviour
         if (start == true)
         {
             secondsCount += Time.deltaTime;
-            Timer.text = FormatTime(secondsCount);
+            TimerText.text = FormatTime(secondsCount);
         }
 
         // if win, pause game        
@@ -121,12 +132,12 @@ public class GameStatus : MonoBehaviour
         // display game status message
         if (type == "pause")
         {
-            PauseMessage.enabled = true;
+            PauseMessage.SetActive(true);
         }
         else if (type == "win")
         {
-            WinMessage.text = "You win!\nTime used: " + FormatTime(secondsCount) + "\nPress \"R\" to restart";
-            WinMessage.enabled = true;
+            WinMessageText.text = "You win!\n\nTime used: " + FormatTime(secondsCount) + "\nPress \"R\" to restart";
+            WinMessage.SetActive(true);
         }
     }
 
@@ -143,8 +154,8 @@ public class GameStatus : MonoBehaviour
         Cursor.visible = false;
 
         // hide UI elements
-        PauseMessage.enabled = false;
-        WinMessage.enabled = false;
+        PauseMessage.SetActive(false);
+        WinMessage.SetActive(false);
     }
 
     public void RestartGame()
@@ -163,8 +174,8 @@ public class GameStatus : MonoBehaviour
         Cursor.visible = false;
 
         // hide UI elements
-        PauseMessage.enabled = false;
-        WinMessage.enabled = false;
+        PauseMessage.SetActive(false);
+        WinMessage.SetActive(false);
 
         // reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
