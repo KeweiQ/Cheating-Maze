@@ -77,7 +77,7 @@ public class GameStatus : MonoBehaviour
         }
 
         // manually pause/resume game
-        if (Input.GetKeyDown(KeyCode.Escape) && welcome == false)
+        if (Input.GetKeyDown(KeyCode.P) && welcome == false)
         {
             if (pause == false)
             {
